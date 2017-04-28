@@ -20,7 +20,7 @@ routeApp.config(function ($routeProvider) {
         controller: 'communauteCtrl'
 
     })
-     .when("/new/id", {
+     .when("/new/:id", {
          templateUrl: 'partiels/recette_new.html',
          controller: 'recette_newCtrl'
      })
@@ -71,11 +71,19 @@ routeApp.controller('communauteCtrl', function($scope, $http){
         console.log("No data found..");
     });
 });
-routeApp.controller('recette_newCtrl', ['$scope',
-    function ($scope) {
-
+routeApp.controller('recette_newCtrl', function ($scope, $routeParams, $http) {
+    $http.get('json/recettes').
+        success(function (data, status, headers, cinfig) {
+            $scope.param = $routeParams.param;
+            $scope.recettes = data;
+           
+        }).
+    error(function (data, status, headers, config) {
+        console.log("No data found..");
+    });
+       
     }
-]);
+);
 routeApp.controller('recette_detailsCtrl', ['$scope',
     function ($scope) {
 
@@ -105,4 +113,11 @@ routeApp.filter('searchFor', function()
         });
         return result;
     };
+});
+
+routeApp.controller('CommentCtrl', function ($scope, $http) {
+    $http.get('json/recettes').
+    success(function (data, status, headers, config) {
+        $scope.ingredients = data;
+    })
 });

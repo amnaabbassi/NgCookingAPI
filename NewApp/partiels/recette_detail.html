@@ -1,18 +1,14 @@
-﻿<div class="col-xs-12 col-sm-9">
+﻿<div class="col-xs-12 col-sm-9" ng-controller="recette_newCtrl">
     <div class="content" id="content_recettes_details">
-        <section class="section">
+        <section class="section" ng-repeat="rec in recettes">
             <div class="row">
                 <div class="col-xs-4">
-                    <img class="recette_img" src="img/recettes/tajine-de-poulet.jpg" alt="Le tajine de ta maman">
+                    <img class="recette_img" src="img/recettes/{{ rec.picture }}" alt="{{ rec.name}}">
                 </div>
                 <div class="col-xs-8">
-                    <h1 class="rec_name">Tajine de poulet</h1>
+                    <h1 class="rec_name">{{ res. name }}</h1>
                     <p class="rec_note">
                         <span class="stars">
-                            <span class="star glyphicon glyphicon-heart"></span>
-                            <span class="star glyphicon glyphicon-heart"></span>
-                            <span class="star glyphicon glyphicon-heart"></span>
-                            <span class="star glyphicon glyphicon-heart"></span>
                             <span class="star glyphicon glyphicon-heart"></span>
                         </span>
                         <span class="notes">| 4,8/5 - 120 votes</span>
@@ -48,6 +44,7 @@
                     <h2 class="overline-title"><span class="text">Préparation</span></h2>
                 </div>
                 <div class="col-xs-12">
+                    {{ rec.preparation }}
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis obcaecati explicabo quisquam est sapiente, nobis, ab fugiat temporibus at sunt tenetur? Voluptate modi sit quibusdam illo nobis doloribus inventore voluptates?</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui possimus ipsam necessitatibus molestias fugit cumque, sed ab architecto recusandae, fuga pariatur cum blanditiis rerum sunt non mollitia eaque iure debitis!Lorem ipsum dolor sit amet, consectetur adipisicing elit. A optio, magni, nihil, consectetur necessitatibus repellendus voluptatem, magnam expedita accusantium iste inventore itaque ratione quidem et quod. Doloribus, expedita tenetur nam?</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam cupiditate voluptatum assumenda, repellat debitis earum aperiam odit veniam nulla. Totam at delectus quod cupiditate laboriosam quae numquam, vitae vero omnis!</p>

@@ -1,4 +1,4 @@
-﻿<div class="col-xs-12 col-sm-9"  ng-controller="communauteCtrl">
+﻿<div class="col-xs-12 col-sm-9" ng-controller="communauteCtrl">
     <div class="content" id="content_users">
         <h1 class="page-title">La communauté</h1>
 
@@ -7,40 +7,41 @@
             <div class="sort">
                 <p>
                     <span class="span-label">Trier par :</span>
-                    <select name="" id="" ng-model="orderbyderlacommunaute" >
-                        <option value="+firstname" >Ordre alphabétique (A->Z)</option>
-                        <option value="-firstname" >Ordre alphabétique (Z->A)</option>
-                        <option value="-level" >Les mieux notés d'abord</option>
-                        <option value="+level" >Les moins bien notés d'abord</option>
-                        <option value="+level" >Les plus productifs d'abord</option>
-                        <option value="prod_desc" >Les moins productifs d'abord</option>
+                    <select name="" id="" ng-model="orderbyderlacommunaute">
+                        <option value="+firstname">Ordre alphabétique (A->Z)</option>
+                        <option value="-firstname">Ordre alphabétique (Z->A)</option>
+                        <option value="-level">Les mieux notés d'abord</option>
+                        <option value="+level">Les moins bien notés d'abord</option>
+                        <option value="+level">Les plus productifs d'abord</option>
+                        <option value="prod_desc">Les moins productifs d'abord</option>
                     </select>
                 </p>
             </div>
+
             <div class="users row" ng-init="count= 8">
-                <div class="col-xs-6 col-sm-3 user" ng-repeat="communaute in communautes | orderBy : orderbyderlacommunaute | limitTo : count" >
+                <div class="col-xs-6 col-sm-3 user" ng-repeat="communaute in communautes | orderBy : orderbyderlacommunaute | limitTo : count">
                     <a href="communaute_details.html">
                         <img src="{{ communaute.picture }}" alt="{{ communaute.firstname}} {{ communaute.surname}}">
                         <div class="text">
                             <p class="name">{{ communaute.firstname}} {{ communaute.surname}}</p>
                             <p class="level">
                                 <span class="stars" ng-repeat="a in (((b=[]).length= communaute.level)&&b) track by $index">
-                                    <span class="glyphicon glyphicon-star" ></span>
-                                   
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="stars" ng-repeat="a in communautes"></span>
                                 </span>
-                                <span class="status"ng-if="communaute.level == 3">Expert</span>
+                                <span class="status" ng-if="communaute.level == 3">Expert</span>
                                 <span class="status" ng-if="communaute.level == 2">Confirmé</span>
                                 <span class="status" ng-if="communaute.level == 1">Novice</span>
                             </p>
                         </div>
                     </a>
                 </div>
+            </div>
+            <div class="row showmore">
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn_color1" ng-click="count = count + 8"><span class="glyphicon glyphicon-chevron-down"></span>Afficher d'avantage</button>
                 </div>
-                <div class="row showmore">
-                    <div class="col-xs-12">
-                        <button type="button" class="btn btn_color1" ng-click="count = count + 8"><span class="glyphicon glyphicon-chevron-down"></span>Afficher d'avantage</button>
-                    </div>
-                </div>
-</section>
+            </div>
+        </section>
     </div>
 </div>

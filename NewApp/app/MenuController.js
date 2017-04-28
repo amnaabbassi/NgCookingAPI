@@ -20,7 +20,7 @@ routeApp.config(function ($routeProvider) {
         controller: 'communauteCtrl'
 
     })
-     .when("/new", {
+     .when("/new/id", {
          templateUrl: 'partiels/recette_new.html',
          controller: 'recette_newCtrl'
      })
@@ -64,8 +64,7 @@ routeApp.controller('communauteCtrl', function($scope, $http){
     $http.get('json/communaute.json').
     success(function(data,status,headers,cinfig)
     {
-        $scope.orderbyderlacommunaute = 'firstname';
-       $scope.communautes = data  ;
+        $scope.communautes = data  ;
   }).
     error(function(data, status,headers,config)
     {

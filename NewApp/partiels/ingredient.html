@@ -42,7 +42,7 @@
                         <p class="col-xs-12 blank">Aucun ingrédient ne correspond à votre recherche</p>
                         <div class="col-xs-12 ingredient" ng-init="count = 10">
                             <div class="ing-wrap" ng-repeat="ingredient in ing | limitTo : count | searchFor: searchName ">
-                                <div class="top">
+                                <div class="top" ng-if="ingredient">
                                     <p class="name">{{ ingredient.name }}</p>
                                     <p class="category" ng-init="categorie = ingredient.category ">{{ ingredient.category }}</p>
                                     <img class="img" src="img/ingredients/{{ ingredient.picture }}" alt="{{ ingredient.name}}">

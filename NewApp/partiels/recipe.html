@@ -37,15 +37,15 @@
                 <div class="sort">
                     <p>
                         <span class="span-label">Trier par :</span>
-                        <select name="" id="" >
-                            <option value="az">Ordre alphabétique (A->Z)</option>
-                            <option value="za">Ordre alphabétique (Z->A)</option>
+                        <select name="" id="" ng-model="orderbyderlarecette" >
+                            <option value="+name">Ordre alphabétique (A->Z)</option>
+                            <option value="-name">Ordre alphabétique (Z->A)</option>
                             <option value="new">Les plus récentes d'abord</option>
                             <option value="old">Les plus anciennes d'abord</option>
-                            <option value="best">Les mieux notées d'abord</option>
-                            <option value="worst">Les moins bien notées d'abord</option>
-                            <option value="cal">Du moins calorique au plus calorique</option>
-                            <option value="cal_desc">Du plus calorique au moins calorique</option>
+                            <option value="+comments.mark">Les mieux notées d'abord</option>
+                            <option value="-comments.mark">Les moins bien notées d'abord</option>
+                            <option value="+calories">Du moins calorique au plus calorique</option>
+                            <option value="-calories">Du plus calorique au moins calorique</option>
                         </select>
                     </p>
                 </div>
@@ -53,7 +53,7 @@
                     <div class="recettes row">
                         <p class="col-xs-12 blank">Aucune recette ne correspond à votre recherche</p>
                         <div class="recettes row" ng-controller= 'recetteCtrl'>
-                            <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | limitTo : 4 ">
+                            <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | limitTo : 4 | orderBy : orderbyderlarecette">
                                 <a href="recettes_details.html">
                                     <img src="{{recette.picture}}" alt="Le tajine de ta maman">
                                     <div class="top" title="note : 3,2/5">

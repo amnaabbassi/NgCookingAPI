@@ -1,0 +1,86 @@
+﻿<div class="col-xs-12 col-sm-9" ng-controller="ingredientCtrl">
+    <div class="content" id="content_ingredients">
+        <h1 class="page-title">Les ingredients</h1>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel">
+                    <div class="row imgback">
+                        <div class="hidden-xs col-sm-3"></div>
+                        <div class="col-xs-12 col-sm-9 fp">
+                            <div class="filters">
+                                <form action="#" novalidate>
+                                    <div class="filter">
+                                        <p><label for="">Nom de l'ingrédient</label></p>
+                                        <p><input type="text" placeholder="ex: Banane" ng-model="searchName"></p>
+                                    </div>
+                                    <div class="filter" ng-controller="CatagoryCtrl">
+                                        <p><label for="">Catégorie</label></p>
+                                        <p>
+                                            <select name="" id="">
+                                                <option value="meat" ng-repeat="categorie in category " ng-model="searchCategory"> {{ categorie.nameToDisplay }}</option>
+                                            </select>
+                                        </p>
+                                    </div>
+                                    <div class="filter">
+                                        <p><label for="">Nombre de calories <span class="fwn">(kcal/100g)</span></label></p>
+                                        <p>
+                                            <span class="span-label">entre :</span>
+                                            <input type="number" class="mr0" placeholder="ex: 70" ng-model="searchNumber1">
+                                            <span class="span-label">et</span>
+                                            <input type="number" placeholder="ex: 220" ng-model="searchNumber2">
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="result">
+                    <div class="ingredients row">
+                        <p class="col-xs-12 blank">Aucun ingrédient ne correspond à votre recherche</p>
+                        <div class="col-xs-12 ingredient" ng-init="count = 10">
+                            <div class="ing-wrap" ng-repeat="ingredient in ing | limitTo : count | searchFor: searchName ">
+                                <div class="top">
+                                    <p class="name">{{ ingredient.name }}</p>
+                                    <p class="category" ng-init="categorie = ingredient.category ">{{ ingredient.category }}</p>
+                                    <img class="img" src="img/ingredients/{{ ingredient.picture }}" alt="{{ ingredient.name}}">
+                                    <div class="calories-wrap">
+                                        <div class="val">
+                                            <span>{{ ingredient.calories }} kcal</span>
+                                            <div class="battery">
+                                                <!-- pourcentage ci-dessous à moduler en fonction du nombre de calories de l'ingredient sur nombre de calories max -->
+                                                <div class="level" style="width: 60%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bot">
+                                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo pariatur obcaecati ut, sit veniam molestias eius cum.</p>
+                                    <div class="list">
+                                        <p class="list-title">Aliments similaires</p>
+                                        <p>{{ categorie }}</p> <!--test de categorie-->
+                                        <ul ng-if="categorie ==  ingredient.category ">
+                                            <li class="item" ng-repeat="ingredient in ing ">
+                                                <img class="item-img" src="img/ingredients/{{ ingredient.picture }}" alt="tomate">
+                                                <p class="item-name" title="{{ ingredient.name}}">{{ ingredient.name}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row showmore">
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn_color1" ng-click="count = count + 10"><span class="glyphicon glyphicon-chevron-down"></span>Afficher d'avantage</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -26,8 +26,7 @@
                             <p class="name">{{ communaute.firstname}} {{ communaute.surname}}</p>
                             <p class="level">
                                 <span class="stars" ng-repeat="a in (((b=[]).length= communaute.level)&&b) track by $index">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="stars" ng-repeat="a in communautes"></span>
+                                    <span class="glyphicon glyphicon-star"></span>                               
                                 </span>
                                 <span class="status" ng-if="communaute.level == 3">Expert</span>
                                 <span class="status" ng-if="communaute.level == 2">Confirmé</span>
@@ -39,7 +38,7 @@
             </div>
             <div class="row showmore">
                 <div class="col-xs-12">
-                    <button type="button" class="btn btn_color1" ng-click="count = count + 8"><span class="glyphicon glyphicon-chevron-down"></span>Afficher d'avantage</button>
+                    <button type="button" class="btn btn_color1" ng-click="count = count + 8" ng-show ="count <= 20" ><span class="glyphicon glyphicon-chevron-down"></span>Afficher d'avantage</button>
                 </div>
             </div>
         </section>

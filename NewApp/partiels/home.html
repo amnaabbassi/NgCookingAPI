@@ -5,15 +5,21 @@
             <h2 class="title">~ Meilleures recettes ~</h2>
             <div class="recettes row">
                 <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | limitTo :  4  ">
-                    <a href="#/details">
+                    <a href="#/details/{{recette.id}}">
                         <img src="{{recette.picture}}" alt="Le tajine de ta maman">
+                       
                         <div class="top" title="note : 3,2/5">
-                            <span class="note" ng-repeat="a in (((b=[]).length= recette.comments.mark)&&b) track by $index">
+                            
+                            <span class="note" ng-repeat="a in [].constructor(recette.comments.mark) track by $index">
                                 <span class="glyphicon glyphicon-heart"></span>
+                                
                             </span>
                         </div>
                         <div class="bot">
                             <p class="name">{{recette.name}}</p>
+                        </div>
+                        <div>
+                           
                         </div>
                     </a>
                 </div>
@@ -24,7 +30,7 @@
                 <div class="col-xs-12">
                     <p class="c">Vous en avez sous la toque ?!</p>
                     <p class="b">
-                        <a href="#/new/:id" class="btn btn_color1"><span class="glyphicon glyphicon-plus-sign"></span><span>Créez une nouvelle recette</span></a>
+                        <a href="#/new" class="btn btn_color1"><span class="glyphicon glyphicon-plus-sign"></span><span>Créez une nouvelle recette</span></a>
                     </p>
                 </div>
             </div>
@@ -33,12 +39,10 @@
             <h2 class="title">~ Nouvelles recettes ~</h2>
             <div class="recettes row">
                 <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | limitTo : 4">
-                    <a href="recettes_details.html">
+                    <a href="#/details/{{recette.id}}">
                         <img src="{{recette.picture}}" alt="Le tajine de ta maman">
                         <div class="top" title="note : 3,2/5">
-                            <span class="note" ng-repeat="a in (((b=[]).length= recette.comments.mark)&&b) track by $index">
-                                <span class="glyphicon glyphicon-heart"></span>
-                            </span>
+                          
                         </div>
                         <div class="bot">
                             <p class="name">{{recette.name}}</p>

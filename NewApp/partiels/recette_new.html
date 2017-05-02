@@ -1,4 +1,5 @@
-﻿<div class="col-xs-12 col-sm-9">
+﻿
+<div class="col-xs-12 col-sm-9" >
     <div class="content" id="content_recettes_new">
 
         <h1 class="page-title">Nouvelle recette</h1>
@@ -10,16 +11,11 @@
                             <label for="">Le nom de votre recette</label>
                             <input type="text" class="mb0 wide" required>
                         </p>
-                        <p class="line">
+                        <p class="line" ng-controller="CatagoryCtrl">
                             <label for="">Catégorie</label>
                             <select name="" id="" class="mb0 wide">
-                                <option value=""></option>
-                                <option value="meat">Viandes</option>
-                                <option value="fruit">Fruits</option>
-                                <option value="vegetable">Légumes</option>
-                                <option value="fish">Poissons</option>
-                                <option value="alcool">Alcools</option>
-                                <option value="">Etc...</option>
+                                <option value="all">Toutes les catégories</option>
+                                <option value="meat" ng-repeat="categorie in category " > {{ categorie.nameToDisplay }}</option>
                             </select>
                         </p>
                         <p class="line">
@@ -27,13 +23,13 @@
                             <textarea id="recette_desc" class="resizable mb0 wide" required></textarea>
                         </p>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6" ng-controller="uploadImage">
                         <p class="line">
                             <label for="">Photo de la recette</label>
-                            <input type="file" class="mb0">
+                            <input type="file" class="mb0" id="file" ngf-change="onChange($files)" ngf-select ng-model="picFile" name="attachement" accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf">
                         </p>
                         <p class="line ac">
-                            <img class="current_img" src="img/recette_placeholder.jpg" alt="Visuel recette">
+                            <img class="current_img"  alt="Visuel recette" ng-if="isImage(fileExt)" ngf-src="picFile[0]" src="img/recette_placeholder.jpg">
                         </p>
                     </div>
                     <div class="col-xs-12">
@@ -43,26 +39,15 @@
                         <p class="line ac">
                             <label for="">Sélectionnez tous les ingrédients de votre recette</label>
                         </p>
-                        <p class="ac">
+                        <p class="ac" ng-controller="CatagoryCtrl">
                             <select name="" id="">
                                 <option value="all">Toutes les catégories</option>
-                                <option value="viandes">Viandes</option>
-                                <option value="legumes">legumes</option>
-                                <option value="fruits">fruits</option>
-                                <option value="poissons">poissons</option>
-                                <option value="produits-laitiers">Produits laitiers</option>
-                                <option value="etc">etc...</option>
+                                <option value="meat" ng-repeat="categorie in category " ng-model="categorfilter"> {{ categorie.nameToDisplay }}</option>
                             </select>
                             <span class="span-label"><span class="glyphicon glyphicon-menu-right nm"></span></span>
-                            <select name="" id="">
-                                <option value="">Poulet</option>
-                                <option value="">Maïs</option>
-                                <option value="">Blé</option>
-                                <option value="">Boeuf</option>
-                                <option value="">Pomme</option>
-                                <option value="">Lait</option>
-                                <option value="">Gruyère</option>
-                                <option value="etc">etc...</option>
+                            <select name="" id="" ng-controller="ingredientCtrl">
+                                <option value="all">Toutes les ingrédients</option>
+                                <option value="meat" ng-repeat="ingredient in ing | filter : ingredient.category  :  categorfilter"> {{ ingredient.name }}</option>
                             </select>
                             <button type="button" class="btn btn_color3"><span class="glyphicon glyphicon-plus"></span></button>
                         </p>

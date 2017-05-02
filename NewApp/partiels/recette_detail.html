@@ -1,40 +1,30 @@
-﻿<div class="col-xs-12 col-sm-9" ng-controller="recette_newCtrl">
+﻿<div class="col-xs-12 col-sm-9" ng-controller="recette_detailsCtrl" >
     <div class="content" id="content_recettes_details">
-        <section class="section" ng-repeat="rec in recettes">
+        <section class="section" >
             <div class="row">
                 <div class="col-xs-4">
-                    <img class="recette_img" src="img/recettes/{{ rec.picture }}" alt="{{ rec.name}}">
+                    <img class="recette_img" src="{{ recette.picture}}" alt="">
                 </div>
                 <div class="col-xs-8">
-                    <h1 class="rec_name">{{ res. name }}</h1>
+                    <h1 class="rec_name">{{ recette.name}}</h1>
                     <p class="rec_note">
                         <span class="stars">
                             <span class="star glyphicon glyphicon-heart"></span>
                         </span>
                         <span class="notes">| 4,8/5 - 120 votes</span>
                     </p>
-                    <div class="ingredients_list">
+                    <div class="ingredients_list"  >
+                      
+                        
                         <p class="list-title">Ingrédients</p>
                         <ul class="list">
-                            <li class="item">
-                                <img class="item-img" src="img/ingredients/tomate.jpg" alt="tomate">
-                                <p class="item-name" title="tomate">tomate</p>
-                            </li>
-                            <li class="item">
-                                <img class="item-img" src="img/ingredients/raisin.jpg" alt="raisin">
-                                <p class="item-name" title="raisin">raisin</p>
-                            </li>
-                            <li class="item">
-                                <img class="item-img" src="img/ingredients/kiwi.jpg" alt="kiwi">
-                                <p class="item-name" title="kiwi">kiwi</p>
-                            </li>
-                            <li class="item">
-                                <img class="item-img" src="img/ingredients/pasteque.jpg" alt="pasteque">
-                                <p class="item-name" title="pasteque">pasteque</p>
+                            <li class="item" ng-repeat="ing in recette.ingredients">
+                                <img class="item-img" src="img/ingredients/{{ ing}}.jpg" alt="tomate">
+                                <p class="item-name" title="tomate">{{ ing}}</p>
                             </li>
                         </ul>
                     </div>
-                    <p class="rec_cal">Valeur calorique <span class="for">(100g)</span> : <span class="val">270 kcal</span></p>
+                    <p class="rec_cal">Valeur calorique <span class="for">(100g)</span> : <span class="val"> {{recette.calories}} kcal</span></p>
                 </div>
             </div>
         </section>
@@ -44,10 +34,7 @@
                     <h2 class="overline-title"><span class="text">Préparation</span></h2>
                 </div>
                 <div class="col-xs-12">
-                    {{ rec.preparation }}
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis obcaecati explicabo quisquam est sapiente, nobis, ab fugiat temporibus at sunt tenetur? Voluptate modi sit quibusdam illo nobis doloribus inventore voluptates?</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui possimus ipsam necessitatibus molestias fugit cumque, sed ab architecto recusandae, fuga pariatur cum blanditiis rerum sunt non mollitia eaque iure debitis!Lorem ipsum dolor sit amet, consectetur adipisicing elit. A optio, magni, nihil, consectetur necessitatibus repellendus voluptatem, magnam expedita accusantium iste inventore itaque ratione quidem et quod. Doloribus, expedita tenetur nam?</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam cupiditate voluptatum assumenda, repellat debitis earum aperiam odit veniam nulla. Totam at delectus quod cupiditate laboriosam quae numquam, vitae vero omnis!</p>
+                     {{ recette.preparation}}                 
                 </div>
             </div>
         </section>
@@ -56,7 +43,7 @@
                 <div class="col-xs-12">
                     <h2 class="overline-title"><span class="text">Commentaires</span></h2>
                 </div>
-                <div class="col-xs-12 col-sm-6">
+                <!--<div class="col-xs-12 col-sm-6">
                     <div class="panel">
                         <div class="filters">
                             <h3 class="panel_title">Donnez-nous votre avis !</h3>
@@ -87,29 +74,40 @@
                             </form>
                         </div>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                    <ul class="comments">
-                        <li class="comment">
-                            <p class="name">Miam miam miaouuu<span class="note">4/5</span></p>
+                </div>-->
+                <div class="col-xs-12 col-sm-6" ng-controller="recette_detailsCtrl">
+                    <ul class="comments" ng-init="count = 6 ">
+                        <li class="comment" ng-repeat="comment in recette.comments">
+                            <p class="name">{{ comment.title}}<span class="note">{{ comment.mark }}/5</span></p>
                             <p class="by">par <a href="communaute_details.html">Béné du 34</a></p>
-                            <p class="text">Franchement cette NgRecette, c’est de la bombe. Le genre de saveurs qui t’éveillent les papilles, t’as vu ! Woula, j’ai kiffé</p>
+                            <p class="text">{{ comment.comment}}</p>
                         </li>
-                        <li class="comment">
-                            <p class="name">Ca pique !<span class="note">2/5</span></p>
-                            <p class="by">par <a href="communaute_details.html">Ades Vapor</a></p>
-                            <p class="text">Quelqu'un a mis du piment dans ma sauce, j'ai passé mon dimanche au toilettes. Sinon, tout va bien..</p>
-                        </li>
-                    </ul>
+                     </ul>
                     <div class="row showmore">
                         <div class="col-xs-12">
-                            <button type="button" class="btn btn_grey"><span class="glyphicon glyphicon-chevron-down"></span>Afficher d'avantage</button>
+                            <button type="button" class="btn btn_grey" ng-hide="count <= 20"><span class="glyphicon glyphicon-chevron-down"></span>Afficher d'avantage</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="section">
+        <section class="section" ng-controller="homeCtrl">
+            <h2 class="title">~ Nouvelles recettes ~</h2>
+            <div class="recettes row">
+                <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | limitTo : 4">
+                    <a href="#/details/{{recette.id}}">
+                        <img src="{{recette.picture}}" alt="Le tajine de ta maman">
+                        <div class="top" title="note : 3,2/5">
+
+                        </div>
+                        <div class="bot">
+                            <p class="name">{{recette.name}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!--<section class="section">
             <h2 class="title">~ Vous aimerez aussi... ~</h2>
             <div class="recettes row">
                 <div class="col-xs-6 col-sm-3 recette">
@@ -169,7 +167,7 @@
                     </a>
                 </div>
             </div>
-        </section>
+        </section>-->
 
     </div>
 </div>

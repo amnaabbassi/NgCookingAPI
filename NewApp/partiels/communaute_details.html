@@ -1,28 +1,28 @@
-﻿<div class="col-xs-12 col-sm-9">
+﻿<div class="col-xs-12 col-sm-9" ng-controller="communaute_detailsCtrl">
     <div class="content" id="content_communaute_details">
 
         <section class="section details">
             <div class="row">
                 <div class="col-vxs-12 col-xs-6 col-sm-5">
                     <div class="avatar-wrap">
-                        <img class="avatar" src="img/users/hetta-van-deventer.jpg" alt="Hetta Van Deventer">
+                        <img class="avatar" src="{{ communaute.picture}}" alt="{{ communaute.firstname}} {{ communaute.surname}}">
                     </div>
                 </div>
                 <div class="col-vxs-12 col-xs-6 col-sm-7">
                     <div class="infos">
-                        <h1 class="name">Hetta Van Deventer</h1>
+                        <h1 class="name">{{ communaute.firstname}} {{ communaute.surname}}</h1>
                         <p class="level">
-                            <span class="stars">
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
+                            <span class="stars" ng-repeat="a in [].constructor(communaute.level) track by $index">
+                                <span class="glyphicon glyphicon-star"></span>                                
                             </span>
-                            <span class="status">Expert</span>
+                            <span class="status" ng-if="communaute.level == 3">Expert</span>
+                            <span class="status" ng-if="communaute.level == 2">Confirmé</span>
+                            <span class="status" ng-if="communaute.level == 1">Novice</span>
                         </p>
-                        <p class="city"><span class="fwb">Ville : </span>Brive la Gaillarde</p>
-                        <p class="age"><span class="fwb">Age : </span>35 ans</p>
-                        <p class="shared"><span class="fwb">Hetta</span> a partagé <span class="nb">3 recettes</span></p>
-                        <p class="bio"><span class="fwb">BIO : </span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio aspernatur fuga quisquam iusto, eum veniam vel cumque autem assumenda nulla illum accusamus, expedita animi quaerat temporibus saepe magnam, dolor minima.</p>
+                        <p class="city"><span class="fwb">Ville : </span>{{ communaute.city}}</p>
+                        <p class="age"><span class="fwb">Age : </span>{{2017 - communaute.birth  }} ans</p>
+                        <p class="shared"><span class="fwb">{{ communaute.firstname}}</span> a partagé <span class="nb">3 recettes</span></p>
+                        <p class="bio"><span class="fwb">BIO : </span>{{ communaute.bio}}</p>
                     </div>
                 </div>
             </div>
@@ -34,17 +34,17 @@
                 <div class="col-xs-12">
                     <p class="c">Vous en avez sous la toque ?!</p>
                     <p class="b">
-                        <a href="recettes_new.html" class="btn btn_color1"><span class="glyphicon glyphicon-plus-sign"></span><span>Créez une nouvelle recette</span></a>
+                        <a href="#/new" class="btn btn_color1"><span class="glyphicon glyphicon-plus-sign"></span><span>Créez une nouvelle recette</span></a>
                     </p>
                 </div>
             </div>
         </section>
         <section class="section">
-            <h2 class="title">~ Les recettes de Hetta ~</h2>
-            <div class="recettes row">
-                <div class="col-xs-6 col-sm-3 recette">
-                    <a href="recettes_details.html">
-                        <img src="img/recettes/tajine-de-poulet.jpg" alt="Le tajine de ta maman">
+            <h2 class="title">~ Les recettes de {{ communaute.firstname }} ~</h2>
+            <div class="recettes row" ng-controller="homeCtrl">
+                <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | filter : {creatorId : communaute.id}">
+                    <a href="#/details/{{recette.id}}">
+                        <img src="{{ recette.picture}}" alt="{{ recette.name}}">
                         <div class="top" title="note : 3,2/5">
                             <span class="note">
                                 <span class="glyphicon glyphicon-heart"></span>
@@ -53,38 +53,7 @@
                             </span>
                         </div>
                         <div class="bot">
-                            <p class="name">Tajine de poulet</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-6 col-sm-3 recette">
-                    <a href="recettes_details.html">
-                        <img src="img/recettes/tarte-citron-meringue.jpg" alt="Tarte citron meringué">
-                        <div class="top" title="note : 4,7/5">
-                            <span class="note">
-                                <span class="glyphicon glyphicon-heart"></span>
-                                <span class="glyphicon glyphicon-heart"></span>
-                                <span class="glyphicon glyphicon-heart"></span>
-                                <span class="glyphicon glyphicon-heart"></span>
-                                <span class="glyphicon glyphicon-heart"></span>
-                            </span>
-                        </div>
-                        <div class="bot">
-                            <p class="name">Tarte citron meringué</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-6 col-sm-3 recette">
-                    <a href="recettes_details.html">
-                        <img src="img/recettes/salade-de-fruit-granite.jpg" alt="Salade de fruits au granité citron">
-                        <div class="top" title="note : 2,4/5">
-                            <span class="note">
-                                <span class="glyphicon glyphicon-heart"></span>
-                                <span class="glyphicon glyphicon-heart"></span>
-                            </span>
-                        </div>
-                        <div class="bot">
-                            <p class="name">Salade de fruits au granité citron</p>
+                            <p class="name">{{ recette.name}}</p>
                         </div>
                     </a>
                 </div>

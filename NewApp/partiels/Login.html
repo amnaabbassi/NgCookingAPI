@@ -1,0 +1,26 @@
+﻿<div class="col-xs-12 col-sm-9" ng-controller="loginCtrl">
+    <div class="content">
+        <div >
+            <p class="page-title">Connexion</p>
+            <form action="#">
+                <p>
+                    <label for="co_user" >Identifiant (email)</label>
+                    <input id="co_user"  type="text" ng-model="LoginData.userEmail"/>
+                 
+                   
+                </p>
+                <p>
+                    <label for="co_pwd"  >Mot de passe</label>
+                    <input id="co_pwd"  type="text" ng-model="LoginData.password" />
+                </p>
+                <p class="ac nm mt2">
+                    <button type="button" class="btn btn_big btn_color1" ng-click="login()"><span class="glyphicon glyphicon-ok"></span><span class="fwb uc">Valider</span></button>
+                    {{ message}}
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="popin-backlayer"></div>
+</div>
+
+

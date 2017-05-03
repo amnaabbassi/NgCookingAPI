@@ -20,7 +20,7 @@
 
             <div class="users row" ng-init="count= 8">
                 <div class="col-xs-6 col-sm-3 user" ng-repeat="communaute in communautes | orderBy : orderbyderlacommunaute | limitTo : count">
-                    <a href="communaute_details.html">
+                    <a href="#/detailsCommunaute/{{ communaute.id}}">
                         <img src="{{ communaute.picture }}" alt="{{ communaute.firstname}} {{ communaute.surname}}">
                         <div class="text">
                             <p class="name">{{ communaute.firstname}} {{ communaute.surname}}</p>

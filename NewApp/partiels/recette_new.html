@@ -42,12 +42,12 @@
                         <p class="ac" ng-controller="CatagoryCtrl">
                             <select name="" id="">
                                 <option value="all">Toutes les catégories</option>
-                                <option value="meat" ng-repeat="categorie in category " ng-model="categorfilter"> {{ categorie.nameToDisplay }}</option>
+                                <option value="meat" ng-repeat="categorie in category " ng-model="nameToDisplay"> {{ categorie.nameToDisplay }}</option>
                             </select>
                             <span class="span-label"><span class="glyphicon glyphicon-menu-right nm"></span></span>
                             <select name="" id="" ng-controller="ingredientCtrl">
                                 <option value="all">Toutes les ingrédients</option>
-                                <option value="meat" ng-repeat="ingredient in ing | filter : ingredient.category  :  categorfilter"> {{ ingredient.name }}</option>
+                                <option value="meat" ng-repeat="ingredient in ing | filter : { category  :  nameToDisplay}"> {{ ingredient.name }}</option>
                             </select>
                             <button type="button" class="btn btn_color3"><span class="glyphicon glyphicon-plus"></span></button>
                         </p>

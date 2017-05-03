@@ -1,4 +1,4 @@
-﻿var routeApp = angular.module('routeApp', ['ngRoute','ngFileUpload']
+﻿var routeApp = angular.module('routeApp', ['ngRoute', 'ngFileUpload', 'ngCookies']
 
   
     );
@@ -30,36 +30,30 @@ routeApp.config(function ($routeProvider) {
         templateUrl: 'partiels/recette_detail.html',
         controller: 'recette_detailsCtrl'
     })
-    .when("/details/:idCommunaute", {
+    .when("/detailsCommunaute/:idCommunaute", {
         templateUrl: 'partiels/communaute_details.html',
         controller: 'communaute_detailsCtrl'
-    });;
+    })
+    .when("/login", {
+        templateUrl: 'partiels/Login.html',
+        controller: 'loginCtrl'
+    });
 }); 
 
-routeApp.controller('homeCtrl',function ($scope, $http) {
+routeApp.controller('homeCtrl',function ($scope,$cookies, $http) {
     $http.get('json/recettes.json').
    success(function (data, status, headers, config) {
        $scope.recettes = data;
-       var comment=[];
-     
-      
+       $cookies.put('hello', 'gbhfgh');
+       var favoriteCookie = $cookies.get('hello', 'gbhfgh');
+       $scope.message = favoriteCookie;
+
    }).
    error(function (data, status, headers, config) {
        console.log("No data found..");
    });
-    //$scope.calculateAverage = function (comment) {
-    //    var sum = 0;
-    //    for (var i = 0; i < comment.length ;i++){
-    //        sum += parseInt(comment[i], 10);
-    //    }
-    //    var avg = sum / comment.length;
-    //    return avg;
-    //    $scope.notecomment = avg;
-    //};
-    
-}
-
-);
+   
+});
 routeApp.controller('recetteCtrl', function ($scope, $http) {
     $http.get('json/recettes.json').
    success(function (data, status, headers, config) {
@@ -103,12 +97,27 @@ routeApp.controller('recette_newCtrl', function ($scope, $http) {
     }
 );
 routeApp.controller('recette_detailsCtrl', function ($scope, $routeParams, $http) {
-  
+
     $http.get('json/recettes.json').
      success(function (data, status, headers, cinfig) {
          $scope.recette = data.find(
            x => {
-           return  x.id ==$routeParams.id;
+               return x.id == $routeParams.id;
+           });
+
+
+     }).
+    error(function (data, status, headers, config) {
+        console.log("No data found..");
+    });
+});
+routeApp.controller('communaute_detailsCtrl', function ($scope, $routeParams, $http) {
+  
+    $http.get('json/communaute.json').
+     success(function (data, status, headers, cinfig) {
+         $scope.communaute = data.find(
+           x => {
+               return x.id == $routeParams.idCommunaute;
          });
          
        
@@ -137,7 +146,7 @@ routeApp.filter('searchFor', function()
         searchName = searchName.toLowerCase();
        
       
-        angular.forEach(arr, function (item, categ) {
+        angular.forEach(arr, function (item) {
             if (item.name.toLowerCase().indexOf(searchName) !== -1 ) {
                 result.push(item );
             }
@@ -186,3 +195,33 @@ routeApp.filter('searchCat', function () {
         return result;
     };
 });
+
+routeApp.controller('loginCtrl', function ($scope, $cookies, $http, $window) {
+    $http.get('json/communaute.json').
+    success(function (data, status, headers, config) {
+        
+        $scope.user = data;
+        $scope. LoginData = {
+            userEmail: "",
+            password: ""
+        };
+       
+        $scope.login = function () {
+           
+            $scope.s = data.find(x => { return x.email == $scope.LoginData.userEmail || x.password == $scope.LoginData.password });
+                if ($scope.s) {                    
+                  // $window.location.href = '#/';
+                   $cookies.put($scope.LoginData.userEmail, $scope.LoginData.password);
+                   var favoriteCookie = $cookies.get(
+                      $scope.LoginData.userEmail,
+                       $scope.LoginData.password
+                   );
+                    $scope.message = favoriteCookie;
+                }
+                else {
+                    $window.location.href = '#/login';
+                }
+            }
+    })
+});
+

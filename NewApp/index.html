@@ -23,6 +23,7 @@
     <link data-require="bootstrap-css@3.x" data-semver="3.0.3" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="Scripts/angular-cookies.js"></script>
     <script src="app/MenuController.js"></script>
     <script src="js/ng-file-upload-all.js"></script>
     
@@ -74,8 +75,9 @@
                                 </ul>
                             </div>
                             <div class="account-area">
-                                <button type="button" class="button connect" data-popin-open="connect_popin"><span class="icon"></span>Connexion</button>
-                                <a href="communaute_details.html" class="button account"><span class="icon"></span>Mon profil</a>
+                                
+                                <a href="#/login" class="button connect" ng-hide="!authentication.isAuth" ><span class="icon"></span>Connexion</a>
+                                <a href="#/detailsCommunaute/{{ cookies.username}}" class="button account"><span class="icon"></span>Mon profil</a>
                                 <button type="button" class="button deconnect"><span class="glyphicon glyphicon-off"></span>Deconnexion</button>
                             </div>
                         </nav>
@@ -103,31 +105,7 @@
             </div>
         </footer>
     </div>
-    <div class="popin" data-popin="connect_popin">
-        <div class="popin-content">
-            <div class="popin-scroll">
-                <p class="popin-title">Connexion</p>
-                <form action="#">
-                    <p>
-                        <label for="co_user" class="fwb">Identifiant (email)</label>
-                        <input id="co_user" class="wide" type="text" />
-                    </p>
-                    <p>
-                        <label for="co_pwd" class="fwb">Mot de passe</label>
-                        <input id="co_pwd" class="wide" type="text" />
-                    </p>
-                    <p class="ac nm mt2">
-                        <button type="button" class="btn btn_big btn_color1"><span class="glyphicon glyphicon-ok"></span><span class="fwb uc">Valider</span></button>
-                    </p>
-                </form>
-            </div>
-            <button class="close popin-close"><span class="glyphicon glyphicon-remove"></span></button>
-        </div>
-        <div class="popin-backlayer"></div>
-    </div>
-
-
-    <div id="mobile-back-layer"></div>
+   <div id="mobile-back-layer"></div>
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.main.js"></script>
 </body>

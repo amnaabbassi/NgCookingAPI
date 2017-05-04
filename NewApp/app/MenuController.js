@@ -1,6 +1,4 @@
 ﻿var routeApp = angular.module('routeApp', ['ngRoute', 'ngFileUpload', 'ngCookies']
-
-  
     );
 
 routeApp.config(function ($routeProvider) {
@@ -9,7 +7,7 @@ routeApp.config(function ($routeProvider) {
         templateUrl: 'partiels/home.html',
         controller: 'homeCtrl'
     })
-    .when("/recettes", {
+    .when("/recipes", {
         templateUrl: 'partiels/recipe.html',
         controller: 'recetteCtrl'
     })
@@ -37,32 +35,40 @@ routeApp.config(function ($routeProvider) {
     .when("/login", {
         templateUrl: 'partiels/Login.html',
         controller: 'loginCtrl'
-    });
+    })
+    .when("/detailsCommunaute/:EmailCommunaute", {
+        templateUrl: 'partiels/communaute_details.html',
+        controller: 'communaute_detailsCtrl'
+    })
+    .otherwise({ redirectTo: "/" });
 }); 
 
 routeApp.controller('homeCtrl',function ($scope,$cookies, $http) {
     $http.get('json/recettes.json').
    success(function (data, status, headers, config) {
-       $scope.recettes = data;
-       $cookies.put('hello', 'gbhfgh');
-       var favoriteCookie = $cookies.get('hello', 'gbhfgh');
-       $scope.message = favoriteCookie;
-
+       $scope.recettes = data; 
+       var cookienow = $cookies.get('Name');
+       $scope.message = cookienow;
    }).
    error(function (data, status, headers, config) {
        console.log("No data found..");
-   });
-   
+   });   
 });
+
 routeApp.controller('recetteCtrl', function ($scope, $http) {
     $http.get('json/recettes.json').
    success(function (data, status, headers, config) {
        $scope.recettes = data;
+
+       $scope.Compar = function () {
+
+       };
    }).
    error(function (data, status, headers, config) {
        console.log("No data found..");
    });
 });
+
 routeApp.controller('ingredientCtrl', function ($scope , $http) {
     $http.get('json/ingredients.json', 'json/categories.json').
     success(function (data, status, headers, cinfig) {
@@ -73,7 +79,8 @@ routeApp.controller('ingredientCtrl', function ($scope , $http) {
         console.log("No data found..");
     });
 
-    });
+});
+
 routeApp.controller('communauteCtrl', function($scope, $http){
     $http.get('json/communaute.json').
     success(function(data,status,headers,cinfig)
@@ -85,6 +92,7 @@ routeApp.controller('communauteCtrl', function($scope, $http){
         console.log("No data found..");
     });
 });
+
 routeApp.controller('recette_newCtrl', function ($scope, $http) {
     $http.get('json/recettes.json').
         success(function (data, status, headers, cinfig) {
@@ -94,10 +102,9 @@ routeApp.controller('recette_newCtrl', function ($scope, $http) {
         console.log("No data found..");
     });
            
-    }
-);
-routeApp.controller('recette_detailsCtrl', function ($scope, $routeParams, $http) {
+});
 
+routeApp.controller('recette_detailsCtrl', function ($scope, $routeParams, $http) {
     $http.get('json/recettes.json').
      success(function (data, status, headers, cinfig) {
          $scope.recette = data.find(
@@ -111,21 +118,29 @@ routeApp.controller('recette_detailsCtrl', function ($scope, $routeParams, $http
         console.log("No data found..");
     });
 });
+
 routeApp.controller('communaute_detailsCtrl', function ($scope, $routeParams, $http) {
-  
-    $http.get('json/communaute.json').
+     $http.get('json/communaute.json').
      success(function (data, status, headers, cinfig) {
-         $scope.communaute = data.find(
+         if ($routeParams.idCommunaute == data.id)
+         {
+             $scope.communaute = data.find(
            x => {
                return x.id == $routeParams.idCommunaute;
-         });
-         
-       
-         }).
+           });
+         } else {
+
+             $scope.communaute = data.find(
+           x => {
+               return x.email == $routeParams.idCommunaute;
+           });
+         }
+    }).
     error(function (data, status, headers, config) {
     console.log("No data found..");
     });
-   });
+   
+});
 
 routeApp.controller('CatagoryCtrl', function ($scope, $http) {
     $http.get('json/categories.json').
@@ -134,6 +149,7 @@ routeApp.controller('CatagoryCtrl', function ($scope, $http) {
     })
 
 });
+
 routeApp.filter('searchFor', function()
 {
     return function (arr, searchName) {
@@ -208,20 +224,50 @@ routeApp.controller('loginCtrl', function ($scope, $cookies, $http, $window) {
        
         $scope.login = function () {
            
-            $scope.s = data.find(x => { return x.email == $scope.LoginData.userEmail || x.password == $scope.LoginData.password });
+            $scope.s = data.find(x => { return x.email == $scope.LoginData.userEmail && x.password == $scope.LoginData.password });
                 if ($scope.s) {                    
-                  // $window.location.href = '#/';
-                   $cookies.put($scope.LoginData.userEmail, $scope.LoginData.password);
-                   var favoriteCookie = $cookies.get(
-                      $scope.LoginData.userEmail,
-                       $scope.LoginData.password
-                   );
-                    $scope.message = favoriteCookie;
+                  
+                  $cookies.put('Name', $scope.LoginData.userEmail);
+                
+                  var favoriteCookie = $cookies.get('Name');
+                  $scope.message = favoriteCookie;
+                  window.location.reload(true);
+                  $window.location.href = '#/';
+                   
                 }
                 else {
+              
                     $window.location.href = '#/login';
+                    $scope.messageerreur = "Your email or password are wrong  try again";
                 }
-            }
+        }
+        $scope.logout = function () {
+            
+            var cookies = $cookies.getAll();
+            angular.forEach(cookies, function (v, k) {
+                $cookies.remove(k);
+                $window.location.reload(true);
+                $window.location = '#/login';
+            });
+            
+        };
     })
+});
+
+routeApp.controller("con", function ($scope) {
+
+    $scope.class = "";
+   
+        if ($scope.class === "page_hom") {
+            $scope.class === "page_hom active";
+        } else if ($scope.class === "page_rec") {
+            $scope.class === "page_rec active";
+        } else if ($scope.class === "page_ing") {
+            $scope.class === "page_ing active";
+        } else if ($scope.class === "page_com") {
+            $scope.class === "page_com active";
+        }
+            
+  
 });
 

@@ -38,7 +38,7 @@
                             <img src="img/logo_header.png" alt="">
                         </a>
                         <div class="desc" ng-controller="homeCtrl">
-                            <p>Bienvenue {{ message }}</p>
+                            <p ng-show="message">Bienvenue {{ message }}</p>
                             <p>Partagez vos meilleures recettes avec<br />la communauté NgCooking</p>
                             <p><a class="link" href="#/home"><strong>245 recettes</strong> à découvrir !</a></p>
                         </div>
@@ -58,20 +58,6 @@
                         </button>
                         <nav id="nav" ng:controller="NavigationController">
                             <div >
-                                <!--<ul class="menu"  >
-                                    <li  class="page_hom" ng-class="{}">
-                                        <a href="#/" >Accueil</a>
-                                    </li>
-                                    <li class="page_rec" >
-                                        <a href="#/recipes">Recettes</a>
-                                    </li>
-                                    <li class="page_ing" >
-                                        <a href="#/ingredients">Ingredients</a>
-                                    </li>
-                                    <li class="page_com" >
-                                        <a href="#/communaute">Communauté</a>
-                                    </li>
-                                </ul>-->
                                 <ul class="menu">
                                     <li ng-repeat="item in items" class="{{ item.itemclass}}" ng-class="{'active': item.id == states.activeItem}" ng-click="states.activeItem=item.id"><a href="{{item.url}}">{{item.title}}</a></li>
                                 </ul>

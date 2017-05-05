@@ -124,6 +124,7 @@ routeApp.controller('communaute_detailsCtrl', function ($scope, $routeParams, $h
      success(function (data, status, headers, cinfig) {
          if ($routeParams.idCommunaute == data.id)
          {
+             $scope.message = data.id;
              $scope.communaute = data.find(
            x => {
                return x.id == $routeParams.idCommunaute;
@@ -253,28 +254,6 @@ routeApp.controller('loginCtrl', function ($scope, $cookies, $http, $window) {
         };
     })
 });
-
-//routeApp.controller("con", function ($scope,$location) {
-
-//    $scope.class = "page_hom";
-//    $scope.class1 = "page_rec";
-//    $scope.class2 = "page_ing";
-//    $scope.class3 = "page_com";
-
-//    //$scope.clickActive = function ($scope) {
-//    //     if ($scope.class === "page_hom" ) {
-//    //        $scope.class === "page_hom active";
-//    //    } else if ($scope.class1 === "page_rec") {
-//    //        $scope.class === "page_rec active";
-//    //    } else if ($scope.class2 === "page_ing") {
-//    //        $scope.class === "page_ing active";
-//    //    } else if ($scope.class3 === "page_com") {
-//    //        $scope.class === "page_com active";
-//    //    }
-//    //};
-  
-//});
-
 
 routeApp.controller('NavigationController', function ($scope) {
     // Have to use a wrapper object, otherwise "activeItem" won't work

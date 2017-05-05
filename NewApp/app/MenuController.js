@@ -254,20 +254,52 @@ routeApp.controller('loginCtrl', function ($scope, $cookies, $http, $window) {
     })
 });
 
-routeApp.controller("con", function ($scope) {
+//routeApp.controller("con", function ($scope,$location) {
 
-    $scope.class = "";
-   
-        if ($scope.class === "page_hom") {
-            $scope.class === "page_hom active";
-        } else if ($scope.class === "page_rec") {
-            $scope.class === "page_rec active";
-        } else if ($scope.class === "page_ing") {
-            $scope.class === "page_ing active";
-        } else if ($scope.class === "page_com") {
-            $scope.class === "page_com active";
-        }
-            
+//    $scope.class = "page_hom";
+//    $scope.class1 = "page_rec";
+//    $scope.class2 = "page_ing";
+//    $scope.class3 = "page_com";
+
+//    //$scope.clickActive = function ($scope) {
+//    //     if ($scope.class === "page_hom" ) {
+//    //        $scope.class === "page_hom active";
+//    //    } else if ($scope.class1 === "page_rec") {
+//    //        $scope.class === "page_rec active";
+//    //    } else if ($scope.class2 === "page_ing") {
+//    //        $scope.class === "page_ing active";
+//    //    } else if ($scope.class3 === "page_com") {
+//    //        $scope.class === "page_com active";
+//    //    }
+//    //};
   
-});
+//});
 
+
+routeApp.controller('NavigationController', function ($scope) {
+    // Have to use a wrapper object, otherwise "activeItem" won't work
+    $scope.states = {};
+    $scope.states.activeItem = 'item1';
+    $scope.items = [{
+        id: 'item1',
+        title: 'Accueil',
+        url: '#/',
+        itemclass: 'page_hom'
+    }, {
+        id: 'item2',
+        title: 'Recettes',
+        url: '#/recipes',
+        itemclass: 'page_rec'
+    }, {
+        id: 'item3',
+        title: 'Ingredients',
+        url: '#/ingredients',
+        itemclass: 'page_ing'
+    }, {
+        id: 'item4',
+        title: 'Communaute',
+        url: '#/communaute',
+        itemclass: 'page_com'
+    }];
+});
+        

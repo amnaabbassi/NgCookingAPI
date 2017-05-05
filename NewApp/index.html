@@ -38,7 +38,7 @@
                             <img src="img/logo_header.png" alt="">
                         </a>
                         <div class="desc" ng-controller="homeCtrl">
-                            <p>{{ message }}</p>
+                            <p>Bienvenue {{ message }}</p>
                             <p>Partagez vos meilleures recettes avec<br />la communauté NgCooking</p>
                             <p><a class="link" href="#/home"><strong>245 recettes</strong> à découvrir !</a></p>
                         </div>
@@ -56,34 +56,38 @@
                         <button type="button" id="mobile-close-btn">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
-                        <nav id="nav">
-
+                        <nav id="nav" ng:controller="NavigationController">
                             <div >
-
-                                <ul class="menu"  >
-                                    <li  class="class" ng-model="home">
+                                <!--<ul class="menu"  >
+                                    <li  class="page_hom" ng-class="{}">
                                         <a href="#/" >Accueil</a>
                                     </li>
-                                    <li class="class" ng-model="recette">
+                                    <li class="page_rec" >
                                         <a href="#/recipes">Recettes</a>
                                     </li>
-                                    <li class="class" ng-model="ingredient">
+                                    <li class="page_ing" >
                                         <a href="#/ingredients">Ingredients</a>
                                     </li>
-                                    <li class="class" ng-model="recette">
+                                    <li class="page_com" >
                                         <a href="#/communaute">Communauté</a>
                                     </li>
+                                </ul>-->
+                                <ul class="menu">
+                                    <li ng-repeat="item in items" class="{{ item.itemclass}}" ng-class="{'active': item.id == states.activeItem}" ng-click="states.activeItem=item.id"><a href="{{item.url}}">{{item.title}}</a></li>
                                 </ul>
+                             
                             </div>
                             <div class="account-area" >
-                                
-                                <a href="#/login" class="button connect"  ><span class="icon"></span>Connexion</a>
                                 <div ng-controller="homeCtrl">
-                                    <a href="#/detailsCommunaute/{{ message}}" class="button account" ng-show="!authentification.auth"><span class="icon"></span>Mon profil</a>
+                                    <a href="#/login" class="button connect" ng-hide="message"><span class="icon"></span>Connexion</a>
+                                </div>
+                                
+                                <div ng-controller="homeCtrl">
+                                    <a href="#/detailsCommunaute/{{ message}}" class="button account" ><span class="icon"></span>Mon profil</a>
                                 </div>
                                 
                               <div ng-controller="loginCtrl">
-                                  <button type="button" class="button deconnect"  ng-click="logout()"  ><span class="glyphicon glyphicon-off"></span>Deconnexion</button>
+                                  <button type="button" class="button deconnect"  ng-click="logout()" ng-hide="message" ><span class="glyphicon glyphicon-off"></span>Deconnexion</button>
                               </div>
                                 
                             </div>

@@ -29,7 +29,7 @@ routeApp.config(function ($routeProvider) {
         controller: 'recette_detailsCtrl'
     })
     .when("/detailsCommunaute/:idCommunaute", {
-        templateUrl: 'partiels/communaute_details.html',
+        templateUrl: 'partials/communaute_details.html',
         controller: 'communaute_detailsCtrl'
     })
     .when("/login", {
@@ -115,28 +115,38 @@ routeApp.controller('recette_newCtrl', function ($scope, $http) {
 
 routeApp.controller('recette_detailsCtrl', function ($scope, $routeParams, $http) {
     $http.get('json/recettes.json').
-     success(function (data, status, headers, cinfig) {
+     success(function (data, status, headers, config) {
+        
          $scope.recette = data.find(
            x => {
                return x.id == $routeParams.id;
-
            });
-         $scope.result = [];
+
+         var result = [];
+
          $http.get('json/communaute.json').success(function (data, status, headers, config) {
              angular.forEach($scope.recette.comments, function (comment) {
-                
-                 $scope.user = data.find(
-                     x => {
-                         return x.id == comment.userId;
-                     })
-                 $scope.result.push($scope.user);
+                 var user = data.find(x => {
+                     return x.id == comment.userId;
+                 })
+                 
+                 comment.firstName = user.firstname;
+                 comment.surName = user.surname;
+                 comment.id = user.id;
+
+                 result.push(comment);
              })
+          $scope.
+             $scope.recette.comments1 = result;
+             //console.log(result);
          }).error(function (data, status, headers, config) {
              console.log("No data found..");
          });
+
      }).error(function (data, status, headers, config) {
          console.log("No data found..");
      });
+  
 });
 
 routeApp.controller('communaute_detailsCtrl', function ($scope, $routeParams, $http) {

@@ -78,9 +78,9 @@
                 </div>-->
                 <div class="col-xs-12 col-sm-6" ng-controller="recette_detailsCtrl">
                     <ul class="comments" ng-init="count = 6 ">
-                        <li class="comment" ng-repeat="comment in recette.comments">
-                            <p class="name">{{comment.title}}<span class="note">{{ comment.mark }}/5</span></p>
-                            <p class="by" ng-repeat="us in result |filter: userId ">par <a href="#/detailsCommunaute/{{ us.id}}"> {{us.firstname}} du 34</a></p>
+                        <li class="comment" ng-repeat="comment in recette.comments1">
+                            <p class="name">{{comment.title}}<span class="note" ng-model="marks">{{ comment.mark }}/5</span></p>
+                            <p class="by">par <a href="#/detailsCommunaute/{{ comment.id}}"> {{comment.firstName}} du 34</a></p>
                             <p class="text">{{comment.comment}}</p>
                         </li>
                      </ul>
@@ -98,8 +98,8 @@
                 <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | limitTo : 4">
                     <a href="#/details/{{recette.id}}">
                         <img src="{{recette.picture}}" alt="Le tajine de ta maman">
-                        <div class="top" title="note : 3,2/5">
-
+                        <div class="top" title="note : 3,2/5" >
+                            <span class="glyphicon glyphicon-heart"></span>
                         </div>
                         <div class="bot">
                             <p class="name">{{recette.name}}</p>

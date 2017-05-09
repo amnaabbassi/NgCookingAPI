@@ -79,9 +79,9 @@
                 <div class="col-xs-12 col-sm-6" ng-controller="recette_detailsCtrl">
                     <ul class="comments" ng-init="count = 6 ">
                         <li class="comment" ng-repeat="comment in recette.comments">
-                            <p class="name">{{ comment.title}}<span class="note">{{ comment.mark }}/5</span></p>
-                            <p class="by">par <a href="communaute_details.html">Béné du 34</a></p>
-                            <p class="text">{{ comment.comment}}</p>
+                            <p class="name">{{comment.title}}<span class="note">{{ comment.mark }}/5</span></p>
+                            <p class="by" ng-repeat="us in result |filter: userId ">par <a href="#/detailsCommunaute/{{ us.id}}"> {{us.firstname}} du 34</a></p>
+                            <p class="text">{{comment.comment}}</p>
                         </li>
                      </ul>
                     <div class="row showmore">
@@ -108,67 +108,6 @@
                 </div>
             </div>
         </section>
-        <!--<section class="section">
-            <h2 class="title">~ Vous aimerez aussi... ~</h2>
-            <div class="recettes row">
-                <div class="col-xs-6 col-sm-3 recette">
-                    <a href="recettes_details.html">
-                        <img src="img/recettes/tajine-de-poulet.jpg" alt="Le tajine de ta maman">
-                        <div class="top" title="note : 2,4/5">
-                            <span class="note">
-                                <span class="glyphicon glyphicon-heart"></span>
-                                <span class="glyphicon glyphicon-heart"></span>
-                            </span>
-                        </div>
-                        <div class="bot">
-                            <p class="name">Tajine de poulet</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-6 col-sm-3 recette">
-                    <a href="recettes_details.html">
-                        <img src="img/recettes/tajine-de-poulet.jpg" alt="Le tajine de ta maman">
-                        <div class="top" title="note : 2,4/5">
-                            <span class="note">
-                                <span class="glyphicon glyphicon-heart"></span>
-                                <span class="glyphicon glyphicon-heart"></span>
-                            </span>
-                        </div>
-                        <div class="bot">
-                            <p class="name">Tajine de poulet</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-6 col-sm-3 recette">
-                    <a href="recettes_details.html">
-                        <img src="img/recettes/tajine-de-poulet.jpg" alt="Le tajine de ta maman">
-                        <div class="top" title="note : 2,4/5">
-                            <span class="note">
-                                <span class="glyphicon glyphicon-heart"></span>
-                                <span class="glyphicon glyphicon-heart"></span>
-                            </span>
-                        </div>
-                        <div class="bot">
-                            <p class="name">Tajine de poulet</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-6 col-sm-3 recette">
-                    <a href="recettes_details.html">
-                        <img src="img/recettes/tajine-de-poulet.jpg" alt="Le tajine de ta maman">
-                        <div class="top" title="note : 2,4/5">
-                            <span class="note">
-                                <span class="glyphicon glyphicon-heart"></span>
-                                <span class="glyphicon glyphicon-heart"></span>
-                            </span>
-                        </div>
-                        <div class="bot">
-                            <p class="name">Tajine de poulet</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>-->
-
+        
     </div>
 </div>

@@ -24,8 +24,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
     <script src="Scripts/angular-cookies.js"></script>
-    <script src="app/MenuController.js"></script>
+    <script src="app/controllers/MenuController.js"></script>
     <script src="js/ng-file-upload-all.js"></script>
+    
     
 </head>
 <body ng-app="routeApp">
@@ -69,11 +70,11 @@
                                 </div>
                                 
                                 <div ng-controller="homeCtrl">
-                                    <a href="#/detailsCommunaute/{{ message}}" class="button account" ><span class="icon"></span>Mon profil</a>
+                                    <a href="#/detailsCommunaute/{{ message}}" class="button account" ng-show="message"><span class="icon"></span>Mon profil</a>
                                 </div>
                                 
                               <div ng-controller="loginCtrl">
-                                  <button type="button" class="button deconnect"  ng-click="logout()" ng-hide="message" ><span class="glyphicon glyphicon-off"></span>Deconnexion</button>
+                                  <button type="button" class="button deconnect"  ng-click="logout()"  ><span class="glyphicon glyphicon-off"></span>Deconnexion</button>
                               </div>
                                 
                             </div>

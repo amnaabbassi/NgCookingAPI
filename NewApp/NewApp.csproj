@@ -66,12 +66,16 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\App.js" />
-    <Content Include="app\Service\authoService.js" />
+    <Content Include="app\controllers\App.js" />
+    <Content Include="app\controllers\CommunauteController.js" />
+    <Content Include="app\controllers\HomeController.js" />
+    <Content Include="app\controllers\IngredientsController.js" />
+    <Content Include="app\controllers\RecipeController.js" />
+    <Content Include="app\services\authoService.js" />
     <Content Include="js\ng-file-upload-all.js" />
     <Content Include="packages.config" />
-    <Content Include="partiels\communaute_details.html" />
-    <Content Include="partiels\Login.html" />
+    <Content Include="partials\communaute_details.html" />
+    <Content Include="partials\Login.html" />
     <Content Include="Scripts\angular-cookies.js" />
     <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
@@ -96,8 +100,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\MenuController.js" />
-    <Content Include="app\recetteController.js" />
+    <Content Include="app\controllers\MenuController.js" />
     <Content Include="css\reset.css" />
     <Content Include="css\style.css" />
     <Content Include="css\_glyphicons.css" />
@@ -222,12 +225,12 @@
     <Content Include="js\angular_route.js" />
     <Content Include="js\jquery-2.1.4.min.js" />
     <Content Include="js\jquery.main.js" />
-    <Content Include="partiels\communautes.html" />
-    <Content Include="partiels\home.html" />
-    <Content Include="partiels\ingredient.html" />
-    <Content Include="partiels\recipe.html" />
-    <Content Include="partiels\recette_detail.html" />
-    <Content Include="partiels\recette_new.html" />
+    <Content Include="partials\communautes.html" />
+    <Content Include="partials\home.html" />
+    <Content Include="partials\ingredient.html" />
+    <Content Include="partials\recipe.html" />
+    <Content Include="partials\recette_detail.html" />
+    <Content Include="partials\recette_new.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -239,7 +242,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\module\" />
+    <Folder Include="app\modules\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

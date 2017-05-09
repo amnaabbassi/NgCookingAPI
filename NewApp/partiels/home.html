@@ -42,7 +42,10 @@
                     <a href="#/details/{{recette.id}}">
                         <img src="{{recette.picture}}" alt="Le tajine de ta maman">
                         <div class="top" title="note : 3,2/5">
-                          
+                            <span class="note" ng-repeat="a in [].constructor(recette.comments.mark) track by $index">
+                                <span class="glyphicon glyphicon-heart"></span>
+
+                            </span>
                         </div>
                         <div class="bot">
                             <p class="name">{{recette.name}}</p>

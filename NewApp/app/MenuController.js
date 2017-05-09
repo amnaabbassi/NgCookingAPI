@@ -49,6 +49,7 @@ routeApp.controller('homeCtrl',function ($scope,$cookies, $http) {
        $scope.recettes = data; 
        var cookienow = $cookies.get('Name');
        $scope.message = cookienow;
+       $scope.number = data.length;
    }).
    error(function (data, status, headers, config) {
        console.log("No data found..");
@@ -58,10 +59,14 @@ routeApp.controller('homeCtrl',function ($scope,$cookies, $http) {
 routeApp.controller('recetteCtrl', function ($scope, $http) {
     $http.get('json/recettes.json').
    success(function (data, status, headers, config) {
-       $scope.recettes = data;
-
-       $scope.Compar = function () {
-
+       $scope.recettes = data; 
+       $scope.numberheart = function () {
+           var sum = 0;
+           for (var i=0  ; i < recettes.comments.length ; i++ ){
+               sum += parseInt(recettes.comments.mark, 10);
+           }
+           var avg = nsum / recettes.comments.length;
+           return avg;
        };
    }).
    error(function (data, status, headers, config) {
@@ -70,10 +75,16 @@ routeApp.controller('recetteCtrl', function ($scope, $http) {
 });
 
 routeApp.controller('ingredientCtrl', function ($scope , $http) {
-    $http.get('json/ingredients.json', 'json/categories.json').
+    $http.get('json/ingredients.json').
     success(function (data, status, headers, cinfig) {
         $scope.ing = data;
-         
+        $http.get( 'json/categories.json').
+             success(function (data, status, headers, cinfig) {
+                 $scope.categories = data;
+             }).
+                error(function (data, status, headers, config) {
+                    console.log("No data found..");
+                });
     }).
     error(function (data, status, headers, config) {
         console.log("No data found..");
@@ -122,9 +133,10 @@ routeApp.controller('recette_detailsCtrl', function ($scope, $routeParams, $http
 routeApp.controller('communaute_detailsCtrl', function ($scope, $routeParams, $http) {
      $http.get('json/communaute.json').
      success(function (data, status, headers, cinfig) {
-         if ($routeParams.idCommunaute == data.id)
+         var number = parseInt($routeParams.idCommunaute);
+         if (!isNaN(number))
          {
-             $scope.message = data.id;
+      
              $scope.communaute = data.find(
            x => {
                return x.id == $routeParams.idCommunaute;
@@ -151,21 +163,33 @@ routeApp.controller('CatagoryCtrl', function ($scope, $http) {
 
 });
 
-routeApp.filter('searchFor', function()
+routeApp.filter('searchFor', function ()
 {
-    return function (arr, searchName) {
-        if (!searchName ) {
+     return function (arr, searchNumber1, searchNumber2) {
+        if (!searchNumber1 && !searchNumber2) {
             return arr;
         }
         var result = [];
        
-
-        searchName = searchName.toLowerCase();
-       
-      
+        
         angular.forEach(arr, function (item) {
-            if (item.name.toLowerCase().indexOf(searchName) !== -1 ) {
-                result.push(item );
+            if (item.calories > searchNumber1 && item.calories < searchNumber2) {
+                result.push(item);
+            }
+        });
+        return result;
+    };
+});
+
+routeApp.filter('searchForRecette', function () {
+    return function (arr, nbr1, nbr2) {
+        if (!nbr1 && !nbr2) {
+            return arr;
+        }
+        var result = [];
+     angular.forEach(arr, function (item) {
+            if (item.calories > nbr1 && item.calories < nbr2) {
+                result.push(item);
             }
         });
         return result;
@@ -255,6 +279,7 @@ routeApp.controller('loginCtrl', function ($scope, $cookies, $http, $window) {
     })
 });
 
+
 routeApp.controller('NavigationController', function ($scope) {
     // Have to use a wrapper object, otherwise "activeItem" won't work
     $scope.states = {};
@@ -281,4 +306,21 @@ routeApp.controller('NavigationController', function ($scope) {
         itemclass: 'page_com'
     }];
 });
-        
+routeApp.filter('searchCat', function () {
+    return function (arr, category) {
+        if (!category) {
+            return arr;
+        }
+        var result = [];
+        category = category.toLowerCase();
+        angular.forEach(arr, function (item) {
+            if (item.category.toLowerCase().indexOf(category) !== -1) {
+                result.push(item);
+            }
+        });
+        return result;
+    };
+});
+routeApp.filter('SearchCalorie', function () {
+
+});

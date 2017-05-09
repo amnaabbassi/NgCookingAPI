@@ -23,9 +23,9 @@
                                         <p><label for="">Valeur calorique de la recette <span class="fwn">(kcal/100g)</span></label></p>
                                         <p>
                                             <span class="span-label">entre :</span>
-                                            <input type="number" class="mr0" placeholder="ex: 450">
+                                            <input type="number" class="mr0" placeholder="ex: 450" ng-model="nbr1">
                                             <span class="span-label">et</span>
-                                            <input type="number" placeholder="ex: 750">
+                                            <input type="number" placeholder="ex: 750" ng-model="nbr2">
                                         </p>
                                     </div>
                                 </form>
@@ -51,7 +51,7 @@
                 <div class="result">
                     <div class="recettes row">
                         <div class="recettes row" ng-controller='recetteCtrl'>
-                            <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | limitTo : 4 | orderBy : orderbyderlarecette | filter : nameRecette : name | filter : Ingredientwrite : ingredients ">
+                            <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | limitTo : 4 | orderBy : orderbyderlarecette | filter : {name : nameRecette , ingredients :Ingredientwrite} |  searchForRecette : nbr1 :nbr2 ">
                              
                                 <div class="top" ng-if="recette">
                                     <a href="#/details/{{recette.id}}">
@@ -76,10 +76,13 @@
 
             <section class="section">
                 <h2 class="title">~ Meilleures recettes ~</h2>
-                <div class="recettes row" ng-controller="recetteCtrl">
+                <div class="recettes row" >
                     <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | limitTo : 4 ">
                         <a href="#/details/{{recette.id}}">
-                            <img src="{{recette.picture}}" alt="Le tajine de ta maman">
+                            <!--<div class="bot">
+                              sgfsdgfsdfsd  {{12 +20 /100}}
+                            </div>-->
+                            <img src="{{recette.picture}}" alt="{{recette.name}}">
                             <div class="top" title="note : 3,2/5">
                                 <span class="note">
                                     <span class="glyphicon glyphicon-heart"></span>
@@ -95,7 +98,7 @@
 
             <section class="section">
                 <h2 class="title">~ Nouvelles recettes ~</h2>
-                <div class="recettes row" ng-controller="recetteCtrl">
+                <div class="recettes row" >
                     div class="recettes row" >
                     <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | limitTo : 4 ">
                         <a href="#/details/{{recette.id}}">

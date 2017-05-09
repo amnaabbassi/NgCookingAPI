@@ -13,13 +13,15 @@
                                         <p><label for="">Nom de l'ingrédient</label></p>
                                         <p><input type="text" placeholder="ex: Banane" ng-model="searchName"></p>
                                     </div>
-                                    <div class="filter" ng-controller="CatagoryCtrl">
+                                    <div class="filter" >
                                         <p><label for="">Catégorie</label></p>
                                         <p>
-                                            <select name="" id="">
-                                                <option value="meat" ng-repeat="categorie in category " ng-model="searchCategory"> {{ categorie.nameToDisplay }}</option>
+                                            <select name="" id="" ng-model="searchCategory">
+                                                <option value="catégorie" >toutes les catégories</option>
+                                                <option value="{{ categorie.id }}" ng-repeat="categorie in categories " > {{ categorie.id }}</option>
                                             </select>
                                         </p>
+                                       
                                     </div>
                                     <div class="filter">
                                         <p><label for="">Nombre de calories <span class="fwn">(kcal/100g)</span></label></p>
@@ -42,7 +44,7 @@
 
                         <div class="col-xs-12 ingredient">
 
-                            <div class="ing-wrap" ng-repeat="ingredient in ing | limitTo : count | searchFor: searchName ">
+                            <div class="ing-wrap" ng-repeat="ingredient in ing | limitTo : count | filter: {name: searchName , category: searchCategory} | searchFor :  searchNumber1 : searchNumber2  ">
 
                                 <div class="top" ng-if="ingredient">
 
@@ -54,7 +56,7 @@
 
                                             <span>{{ ingredient.calories }} kcal</span>
                                             <div class="battery">
-
+                                       
                                                 <!-- pourcentage ci-dessous à moduler en fonction du nombre de calories de l'ingredient sur nombre de calories max -->
                                                 <div class="level" style="width: {{ (ingredient.calories * 100 ) / ingredient.calories.max}}"></div>
                                             </div>

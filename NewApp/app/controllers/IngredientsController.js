@@ -1,20 +1,10 @@
 ﻿(function () {
-
-
-    var IngredientCtrl = function ($scope, $http) {
-        $http.get('json/ingredients.json').
-        success(function (data, status, headers, cinfig) {
+    var IngredientCtrl = function ($scope, IngredientService, CategorieService) {
+        IngredientService.fetch().then(function (data) {
             $scope.ing = data;
-            $http.get('json/categories.json').
-                 success(function (data, status, headers, cinfig) {
-                     $scope.categories = data;
-                 }).
-                    error(function (data, status, headers, config) {
-                        console.log("No data found..");
-                    });
-        }).
-        error(function (data, status, headers, config) {
-            console.log("No data found..");
+            CategorieService.fetch().then(function (data) {
+                $scope.categories = data;
+            });
         });
     };
     angular.module('routeApp').controller('ingredientCtrl', IngredientCtrl);

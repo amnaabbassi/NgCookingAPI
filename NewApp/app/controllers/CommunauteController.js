@@ -1,15 +1,11 @@
 ﻿(function () {
 
 
-    var communauteCtrl = function ($scope, $http) {
-        $http.get('json/communaute.json').
-        success(function (data, status, headers, cinfig) {
+    var communauteCtrl = function ($scope, CommunauteService) {
+        CommunauteService.fetch().then(function (data) {
             $scope.communautes = data;
-        }).
-        error(function (data, status, headers, config) {
-            console.log("No data found..");
         });
-    };
+    }
     angular.module('routeApp').controller('communauteCtrl', communauteCtrl);
 
     var detailsCommunauteCtrl = function ($scope, $routeParams, $http) {

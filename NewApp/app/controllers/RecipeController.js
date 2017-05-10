@@ -1,6 +1,4 @@
 ﻿(function () {
-
-
     var recipeCtrl = function ($scope, RecipeService) {
        RecipeService.fetch().then(function(data){
        $scope.recettes = data;
@@ -25,7 +23,7 @@
                });
 
              var result = [];
-             var sum;
+           
              $http.get('json/communaute.json').success(function (data, status, headers, config) {
                  angular.forEach($scope.recette.comments, function (comment) {
                      var user = data.find(x => {

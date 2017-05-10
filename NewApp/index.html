@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" ng-app="routeApp">
 <head>
     <meta charset="utf-8" />
     <title>NgCooking</title>
@@ -24,12 +24,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
     <script src="Scripts/angular-cookies.js"></script>
+    <script src="app/controllers/App.js"></script>
     <script src="app/controllers/MenuController.js"></script>
+    <script src="app/controllers/CommunauteController.js"></script>
+    <script src="app/controllers/IngredientsController.js"></script>
+    <script src="app/controllers/RecipeController.js"></script>
+    <script src="app/controllers/HomeController.js"></script>
     <script src="js/ng-file-upload-all.js"></script>
+    <script src="app/services/RecetteService.js"></script>
     
     
 </head>
-<body ng-app="routeApp">
+<body >
     <div id="wrapper">
         <header id="header">
             <div class="container">

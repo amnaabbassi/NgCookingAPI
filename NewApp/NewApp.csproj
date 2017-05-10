@@ -71,7 +71,10 @@
     <Content Include="app\controllers\HomeController.js" />
     <Content Include="app\controllers\IngredientsController.js" />
     <Content Include="app\controllers\RecipeController.js" />
-    <Content Include="app\services\authoService.js" />
+    <Content Include="app\services\CategoriesService.js" />
+    <Content Include="app\services\CommunauteService.js" />
+    <Content Include="app\services\IngredientService.js" />
+    <Content Include="app\services\RecetteService.js" />
     <Content Include="js\ng-file-upload-all.js" />
     <Content Include="packages.config" />
     <Content Include="partials\communaute_details.html" />

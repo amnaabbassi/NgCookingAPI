@@ -1,6 +1,6 @@
 ﻿<div>
     <div class="col-xs-12 col-sm-9">
-        <div class="content" id="content_recettes" ng-controller='recetteCtrl'>
+        <div class="content" id="content_recettes" >
             <h1 class="page-title">Les recettes</h1>
 
             <section class="section">
@@ -51,7 +51,7 @@
                 <div class="result">
                     <div class="recettes row">
                         <div class="recettes row" ng-controller='recetteCtrl'>
-                            <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes | limitTo : 4 | orderBy : orderbyderlarecette | filter : {name : nameRecette , ingredients :Ingredientwrite} |  searchForRecette : nbr1 :nbr2 ">
+                            <div class="col-xs-6 col-sm-3 recette" ng-repeat="recette in recettes  | limitTo : 4 | orderBy : orderbyderlarecette | filter : {name : nameRecette , ingredients :Ingredientwrite }  |  searchForRecette : nbr1 :nbr2 track by $index">
                              
                                 <div class="top" ng-if="recette">
                                     <a href="#/details/{{recette.id}}">

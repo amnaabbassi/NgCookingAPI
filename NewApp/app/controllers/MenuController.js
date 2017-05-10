@@ -1,240 +1,66 @@
-﻿var routeApp = angular.module('routeApp', ['ngRoute', 'ngFileUpload', 'ngCookies']
-    );
+﻿(function () { 
 
-routeApp.config(function ($routeProvider) {
-    $routeProvider
-    .when("/", {
-        templateUrl: 'partials/home.html',
-        controller: 'homeCtrl'
-    })
-    .when("/recipes", {
-        templateUrl: 'partials/recipe.html',
-        controller: 'recetteCtrl'
-    })
-    .when("/ingredients", {
-        templateUrl: 'partials/ingredient.html',
-        controller: 'ingredientCtrl'
-    })
-    .when("/communaute", {
-        templateUrl: 'partials/communautes.html',
-        controller: 'communauteCtrl'
-
-    })
-     .when("/new", {
-         templateUrl: 'partials/recette_new.html',
-         controller: 'recette_newCtrl'
-     })
-    .when("/details/:id", {
-        templateUrl: 'partials/recette_detail.html',
-        controller: 'recette_detailsCtrl'
-    })
-    .when("/detailsCommunaute/:idCommunaute", {
-        templateUrl: 'partials/communaute_details.html',
-        controller: 'communaute_detailsCtrl'
-    })
-    .when("/login", {
-        templateUrl: 'partials/Login.html',
-        controller: 'loginCtrl'
-    })
-    .when("/detailsCommunaute/:EmailCommunaute", {
-        templateUrl: 'partials/communaute_details.html',
-        controller: 'communaute_detailsCtrl'
-    })
-    .otherwise({ redirectTo: "/" });
-});
-
-routeApp.controller('homeCtrl', function ($scope, $cookies, $http) {
-    $http.get('json/recettes.json').
-   success(function (data, status, headers, config) {
-       $scope.recettes = data;
-       var cookienow = $cookies.get('Name');
-       $scope.message = cookienow;
-       $scope.number = data.length;
-   }).
-   error(function (data, status, headers, config) {
-       console.log("No data found..");
-   });
-});
-
-routeApp.controller('recetteCtrl', function ($scope, $http) {
-    $http.get('json/recettes.json').
-   success(function (data, status, headers, config) {
-       $scope.recettes = data;
-       $scope.numberheart = function () {
-           var sum = 0;
-           for (var i = 0  ; i < recettes.comments.length ; i++) {
-               sum += parseInt(recettes.comments.mark, 10);
-           }
-           var avg = nsum / recettes.comments.length;
-           return avg;
-       };
-   }).
-   error(function (data, status, headers, config) {
-       console.log("No data found..");
-   });
-});
-
-routeApp.controller('ingredientCtrl', function ($scope, $http) {
-    $http.get('json/ingredients.json').
-    success(function (data, status, headers, cinfig) {
-        $scope.ing = data;
+    var CatagoryCtrl = function ($scope, $http) {
         $http.get('json/categories.json').
-             success(function (data, status, headers, cinfig) {
-                 $scope.categories = data;
-             }).
-                error(function (data, status, headers, config) {
-                    console.log("No data found..");
-                });
-    }).
-    error(function (data, status, headers, config) {
-        console.log("No data found..");
-    });
-
-});
-
-routeApp.controller('communauteCtrl', function ($scope, $http) {
-    $http.get('json/communaute.json').
-    success(function (data, status, headers, cinfig) {
-        $scope.communautes = data;
-    }).
-    error(function (data, status, headers, config) {
-        console.log("No data found..");
-    });
-});
-
-routeApp.controller('recette_newCtrl', function ($scope, $http) {
-    $http.get('json/recettes.json').
-        success(function (data, status, headers, cinfig) {
-            $scope.recettes = data;
-        }).
-    error(function (data, status, headers, config) {
-        console.log("No data found..");
-    });
-
-});
-
-routeApp.controller('recette_detailsCtrl', function ($scope, $routeParams, $http) {
-    $http.get('json/recettes.json').
-     success(function (data, status, headers, config) {
-        
-         $scope.recette = data.find(
-           x => {
-               return x.id == $routeParams.id;
-           });
-
-         var result = [];
-
-         $http.get('json/communaute.json').success(function (data, status, headers, config) {
-             angular.forEach($scope.recette.comments, function (comment) {
-                 var user = data.find(x => {
-                     return x.id == comment.userId;
-                 })
-                 
-                 comment.firstName = user.firstname;
-                 comment.surName = user.surname;
-                 comment.id = user.id;
-
-                 result.push(comment);
-             })
-          $scope.
-             $scope.recette.comments1 = result;
-             //console.log(result);
-         }).error(function (data, status, headers, config) {
-             console.log("No data found..");
-         });
-
-     }).error(function (data, status, headers, config) {
-         console.log("No data found..");
-     });
-  
-});
-
-routeApp.controller('communaute_detailsCtrl', function ($scope, $routeParams, $http) {
-    $http.get('json/communaute.json').
-    success(function (data, status, headers, cinfig) {
-        var number = parseInt($routeParams.idCommunaute);
-        if (!isNaN(number)) {
-
-            $scope.communaute = data.find(
-          x => {
-              return x.id == $routeParams.idCommunaute;
-          });
-        } else {
-
-            $scope.communaute = data.find(
-          x => {
-              return x.email == $routeParams.idCommunaute;
-          });
-        }
-    }).
-   error(function (data, status, headers, config) {
-       console.log("No data found..");
-   });
-
-});
-
-routeApp.controller('CatagoryCtrl', function ($scope, $http) {
-    $http.get('json/categories.json').
-    success(function (data, status, headers, config) {
-        $scope.category = data;
-    })
-
-});
-
-routeApp.filter('searchFor', function () {
-    return function (arr, searchNumber1, searchNumber2) {
-        if (!searchNumber1 && !searchNumber2) {
-            return arr;
-        }
-        var result = [];
-
-
-        angular.forEach(arr, function (item) {
-            if (item.calories > searchNumber1 && item.calories < searchNumber2) {
-                result.push(item);
-            }
+        success(function (data, status, headers, config) {
+            $scope.category = data;
+        })
+        error(function (data, status, headers, config) {
+            console.log("No data found..");
         });
-        return result;
     };
-});
+    angular.module('routeApp').controller('CatagoryCtrl', CatagoryCtrl);
 
-routeApp.filter('searchForRecette', function () {
-    return function (arr, nbr1, nbr2) {
-        if (!nbr1 && !nbr2) {
-            return arr;
-        }
-        var result = [];
-        angular.forEach(arr, function (item) {
-            if (item.calories > nbr1 && item.calories < nbr2) {
-                result.push(item);
+    var filterserchfor= function () {
+        return function (arr, searchNumber1, searchNumber2) {
+            if (!searchNumber1 && !searchNumber2) {
+                return arr;
             }
-        });
-        return result;
+            var result = [];
+
+
+            angular.forEach(arr, function (item) {
+                if (item.calories > searchNumber1 && item.calories < searchNumber2) {
+                    result.push(item);
+                }
+            });
+            return result;
+        };
     };
-});
+    angular.module('routeApp').filter('searchFor',filterserchfor);
 
-routeApp.controller('CommentCtrl', function ($scope, $http) {
-    $http.get('json/recettes.json').
-    success(function (data, status, headers, config) {
-        $scope.recette = data;
-    })
-});
-
-routeApp.controller('uploadImage', ['$scope', '$http', '$timeout', '$compile', 'Upload',
-     function ($scope, $http, $timeout, $compile, Upload) {
-         $scope.onChange = function (files) {
-             if (files[0] == undefined) return;
-             $scope.fileExt = files[0].name.split(".").pop()
-         }
-         $scope.isImage = function (ext) {
-             if (ext) {
-                 return ext == "jpg" || ext == "jpeg" || ext == "gif" || ext == "png"
-             }
-         }
-     }]);
+    var searchForRecette = function () {
+        return function (arr, nbr1, nbr2) {
+            if (!nbr1 && !nbr2) {
+                return arr;
+            }
+            var result = [];
+            angular.forEach(arr, function (item) {
+                if (item.calories > nbr1 && item.calories < nbr2) {
+                    result.push(item);
+                }
+            });
+            return result;
+        }
+    };
+    angular.module('routeApp').filter('searchForRecette', searchForRecette);
 
 
-routeApp.filter('searchCat', function () {
+    var uploadImage = function ($scope, $http, $timeout, $compile, Upload) {
+        $scope.onChange = function (files) {
+            if (files[0] == undefined) return;
+            $scope.fileExt = files[0].name.split(".").pop()
+        }
+        $scope.isImage = function (ext) {
+            if (ext) {
+                return ext == "jpg" || ext == "jpeg" || ext == "gif" || ext == "png"
+            }
+        }
+    };
+angular.module('routeApp').controller('uploadImage',['$scope', '$http', '$timeout', '$compile', 'Upload', uploadImage]);
+
+
+var searchCat = function () {
     return function (arr, category) {
         if (!category) {
             return arr;
@@ -252,9 +78,11 @@ routeApp.filter('searchCat', function () {
         });
         return result;
     };
-});
+};
+angular.module('routeApp').filter('searchCat', searchCat);
 
-routeApp.controller('loginCtrl', function ($scope, $cookies, $http, $window) {
+
+var login = function ($scope, $cookies, $http, $window) {
     $http.get('json/communaute.json').
     success(function (data, status, headers, config) {
 
@@ -294,10 +122,10 @@ routeApp.controller('loginCtrl', function ($scope, $cookies, $http, $window) {
 
         };
     })
-});
+};
+angular.module('routeApp').controller('loginCtrl',login);
 
-
-routeApp.controller('NavigationController', function ($scope) {
+var Navigation = function ($scope) {
     // Have to use a wrapper object, otherwise "activeItem" won't work
     $scope.states = {};
     $scope.states.activeItem = 'item1';
@@ -322,20 +150,7 @@ routeApp.controller('NavigationController', function ($scope) {
         url: '#/communaute',
         itemclass: 'page_com'
     }];
-});
+};
+angular.module('routeApp').controller('NavigationController',Navigation);
 
-routeApp.filter('searchCat', function () {
-    return function (arr, category) {
-        if (!category) {
-            return arr;
-        }
-        var result = [];
-        category = category.toLowerCase();
-        angular.forEach(arr, function (item) {
-            if (item.category.toLowerCase().indexOf(category) !== -1) {
-                result.push(item);
-            }
-        });
-        return result;
-    };
-});
+}());

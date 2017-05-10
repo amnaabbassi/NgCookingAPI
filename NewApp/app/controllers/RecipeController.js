@@ -2,28 +2,17 @@
 
 
     var recipeCtrl = function ($scope, RecipeService) {
-       // $http.get('json/recettes.json').
-       //success(function (data, status, headers, config) {
-       //    $scope.recettes = data;
-          
-       //}).
-       //error(function (data, status, headers, config) {
-       //    console.log("No data found..");
-        //});
-        //$scope.recettes = [];
-        $scope.recettes = RecipeService.getRecette();
-    };
+       RecipeService.fetch().then(function(data){
+       $scope.recettes = data;
+        })
+};
     angular.module('routeApp').controller('recetteCtrl', recipeCtrl);
 
-    var newrecipeCtrl = function ($scope, $http) {
-        $http.get('json/recettes.json').
-            success(function (data, status, headers, cinfig) {
-                $scope.recettes = data;
-            }).
-        error(function (data, status, headers, config) {
-            console.log("No data found..");
-        });
-    };
+    var newrecipeCtrl = function ($scope, RecipeService) {
+        RecipeService.fetch().then(function (data) {
+            $scope.recettes = data;
+        })
+};
     angular.module('routeApp').controller('recette_newCtrl', newrecipeCtrl);
     
     var detailsrecipe = function ($scope, $routeParams, $http) {

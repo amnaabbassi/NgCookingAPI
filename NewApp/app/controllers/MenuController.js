@@ -4,10 +4,8 @@
         $http.get('json/categories.json').
         success(function (data, status, headers, config) {
             $scope.category = data;
-        })
-        error(function (data, status, headers, config) {
-            console.log("No data found..");
         });
+        
     };
     angular.module('routeApp').controller('CatagoryCtrl', CatagoryCtrl);
 

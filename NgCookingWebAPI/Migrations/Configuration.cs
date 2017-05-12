@@ -3,6 +3,7 @@ namespace NgCookingWebAPI.Migrations
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.IO;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<NgCookingWebAPI.Models.NgCookingWebAPIContext>
@@ -14,6 +15,12 @@ namespace NgCookingWebAPI.Migrations
 
         protected override void Seed(NgCookingWebAPI.Models.NgCookingWebAPIContext context)
         {
+            // read a json file
+            StreamReader fileCommunauty = new StreamReader("~/json/ communaute.json");
+
+            //sérialization de données json
+
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

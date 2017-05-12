@@ -98,9 +98,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705121338008_InitialCreate.cs" />
-    <Compile Include="Migrations\201705121338008_InitialCreate.Designer.cs">
-      <DependentUpon>201705121338008_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201705121525258_Initial.cs" />
+    <Compile Include="Migrations\201705121525258_Initial.Designer.cs">
+      <DependentUpon>201705121525258_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Community.cs" />
@@ -109,6 +109,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="json\categories.json" />
+    <Content Include="json\communaute.json" />
+    <Content Include="json\ingredients.json" />
+    <Content Include="json\recettes.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -120,8 +124,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705121338008_InitialCreate.resx">
-      <DependentUpon>201705121338008_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705121525258_Initial.resx">
+      <DependentUpon>201705121525258_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

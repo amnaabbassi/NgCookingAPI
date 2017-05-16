@@ -103,8 +103,11 @@
       <DependentUpon>201705121525258_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\categories.cs" />
     <Compile Include="Models\Community.cs" />
+    <Compile Include="Models\ingredients.cs" />
     <Compile Include="Models\NgCookingWebAPIContext.cs" />
+    <Compile Include="Models\recette.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

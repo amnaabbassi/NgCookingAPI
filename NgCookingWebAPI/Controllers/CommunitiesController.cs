@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using NgCookingWebAPI.Models;
+using NgCookingWebAPI.Migrations;
 
 namespace NgCookingWebAPI.Controllers
 {
@@ -19,6 +20,8 @@ namespace NgCookingWebAPI.Controllers
         // GET: api/Communities
         public IQueryable<Community> GetCommunities()
         {
+            Configuration config = new Configuration();
+            config.Seed(db);
             return db.Communities;
         }
 

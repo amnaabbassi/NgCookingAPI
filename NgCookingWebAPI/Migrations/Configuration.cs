@@ -54,7 +54,6 @@ namespace NgCookingWebAPI.Migrations
                     context.ingredients.AddOrUpdate(ing);
                 }
                 context.SaveChanges();
-                base.Seed(context);
                 //base.Seed(context);
             }
             catch (System.Exception ex)

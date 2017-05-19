@@ -20,7 +20,6 @@ namespace NgCookingWebAPI.Models
         public DbSet<categorie> categories { get; set; }
 
         public DbSet<ingredients> ingredients { get; set; }
-
   
     }
 }

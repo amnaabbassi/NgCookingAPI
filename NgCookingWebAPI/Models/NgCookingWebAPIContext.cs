@@ -15,11 +15,6 @@ namespace NgCookingWebAPI.Models
         {
         }
 
-        //public override void OnModelCreating()
-        //{
-        //    Database.SetInitializer(new MigrateDatabaseToLatestVersion<NgCookingWebAPIContext, Configuration>()); 
-        //}
-
         public DbSet<Community> Communities { get; set; }
 
         public DbSet<categorie> categories { get; set; }

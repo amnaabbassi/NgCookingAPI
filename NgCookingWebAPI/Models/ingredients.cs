@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NgCookingWebAPI.Models
 {
@@ -23,7 +20,12 @@ namespace NgCookingWebAPI.Models
         [JsonProperty(PropertyName = "calories")]
         public int calories { get; set; }
 
-        [JsonProperty(PropertyName = "id")]
-        public virtual List<categories> category { get; set; }
+        [JsonProperty(PropertyName = "category")]
+        public int category { get; set; }
+
+        [ForeignKey("id")]
+        public virtual categorie idCategory { get; set; }
+        
+        //public virtual List<recette> recette { get; set; }
     }
 }

@@ -94,16 +94,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\categoriesController.cs" />
     <Compile Include="Controllers\CommunitiesController.cs" />
+    <Compile Include="Controllers\ingredientsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705121525258_Initial.cs" />
-    <Compile Include="Migrations\201705121525258_Initial.Designer.cs">
-      <DependentUpon>201705121525258_Initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\categories.cs" />
+    <Compile Include="Models\categorie.cs" />
     <Compile Include="Models\Community.cs" />
     <Compile Include="Models\ingredients.cs" />
     <Compile Include="Models\NgCookingWebAPIContext.cs" />
@@ -126,11 +124,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705121525258_Initial.resx">
-      <DependentUpon>201705121525258_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -146,7 +139,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55356</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53491/</IISUrl>
+          <IISUrl>http://localhost:65224/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

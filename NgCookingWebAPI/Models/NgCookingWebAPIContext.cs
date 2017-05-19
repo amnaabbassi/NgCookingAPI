@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 
 namespace NgCookingWebAPI.Models
 {
@@ -19,6 +15,17 @@ namespace NgCookingWebAPI.Models
         {
         }
 
-        public System.Data.Entity.DbSet<NgCookingWebAPI.Models.Community> Communities { get; set; }
+        //public override void OnModelCreating()
+        //{
+        //    Database.SetInitializer(new MigrateDatabaseToLatestVersion<NgCookingWebAPIContext, Configuration>()); 
+        //}
+
+        public DbSet<Community> Communities { get; set; }
+
+        public DbSet<categorie> categories { get; set; }
+
+        public DbSet<ingredients> ingredients { get; set; }
+
+  
     }
 }
